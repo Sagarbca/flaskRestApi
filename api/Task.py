@@ -6,6 +6,7 @@ from bson.objectid import ObjectId
 from flask import jsonify,request
 from werkzeug.security import generate_password_hash,check_password_hash
 from app import mongo,app
+import json
 
 class Task(Resource):
 
@@ -13,9 +14,7 @@ class Task(Resource):
         logger.debug("inside get method")
         users = mongo.db.users.find()
         response = dumps(users)
-        return response
-
-
+        return json.loads(response)
 
     def post(self):
         logger.debug("inside post method")
